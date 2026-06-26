@@ -1,7 +1,7 @@
 // JavaScript principal de la UI
 let moduloActual = 'productos';
 
-// ── INICIALIZACIÓN ───────────────────────────────────────────────────────────
+// --- INICIALIZACIÓN --
 document.addEventListener('DOMContentLoaded', async () => {
   mostrarCargando(true);
   try {
@@ -19,7 +19,7 @@ function mostrarCargando(estado) {
   document.getElementById('loading-overlay').style.display = estado ? 'flex' : 'none';
 }
 
-// ── NAVEGACIÓN ───────────────────────────────────────────────────────────────
+// --- NAVEGACIÓN ---
 function configurarNavegacion() {
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', e => {
@@ -51,7 +51,7 @@ function cargarModulo(modulo) {
   }
 }
 
-// ── NOTIFICACIONES ───────────────────────────────────────────────────────────
+// --- NOTIFICACIONES ---
 function toast(msg, tipo = 'success') {
   const cont = document.getElementById('toast-container');
   const t = document.createElement('div');
@@ -65,16 +65,21 @@ function toast(msg, tipo = 'success') {
 function mostrarError(msg) { toast(msg, 'error'); }
 function mostrarExito(msg) { toast(msg, 'success'); }
 
-// ── MODAL ────────────────────────────────────────────────────────────────────
+// --- MODAL ---
 function abrirModal(titulo, htmlContenido, onGuardar) {
   document.getElementById('modal-titulo').textContent = titulo;
   document.getElementById('modal-body').innerHTML = htmlContenido;
   document.getElementById('modal-overlay').classList.add('active');
 
-  document.getElementById('modal-guardar').onclick = () => {
+  // Clonar el botón para eliminar cualquier listener previo acumulado
+  const btnViejo = document.getElementById('modal-guardar');
+  const btnNuevo = btnViejo.cloneNode(true);
+  btnViejo.parentNode.replaceChild(btnNuevo, btnViejo);
+
+  btnNuevo.addEventListener('click', () => {
     try { onGuardar(); }
     catch (err) { mostrarError(err.message); }
-  };
+  });
 }
 
 function cerrarModal() {
@@ -85,7 +90,7 @@ document.addEventListener('click', e => {
   if (e.target.id === 'modal-overlay') cerrarModal();
 });
 
-// ── CONFIRMAR ELIMINACIÓN ────────────────────────────────────────────────────
+// --- CONFIRMAR ELIMINACIÓN ---
 function confirmarEliminar(msg, onConfirm) {
   document.getElementById('confirm-msg').textContent = msg;
   document.getElementById('confirm-overlay').classList.add('active');
@@ -99,9 +104,9 @@ function cerrarConfirm() {
   document.getElementById('confirm-overlay').classList.remove('active');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// =====================================================
 // MÓDULO: PRODUCTOS (entidad principal — CRUD completo)
-// ═══════════════════════════════════════════════════════════════════════════════
+// =====================================================
 function renderProductos() {
   const stats = Productos.estadisticas();
   const categorias = Productos.categoriasUnicas();
@@ -161,7 +166,7 @@ function renderProductos() {
                 <td><span class="badge ${p.estado==='activo'?'badge-green':'badge-gray'}">${p.estado}</span></td>
                 <td class="acciones">
                   <button class="btn btn-sm btn-outline" onclick="formProducto(${p.id})">Editar</button>
-                  <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${p.id},'${p.nombre}')">Eliminar</button>
+                  <button class="btn btn-sm btn-danger" data-id="${p.id}" data-nombre="${p.nombre}" onclick="eliminarProducto(this)">Eliminar</button>
                 </td>
               </tr>`).join('')}
         </tbody>
@@ -232,9 +237,9 @@ function eliminarProducto(id, nombre) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// ================
 // MÓDULO: USUARIOS
-// ═══════════════════════════════════════════════════════════════════════════════
+// ================
 function renderUsuarios() {
   const stats = Usuarios.estadisticas();
   const busqueda = document.getElementById('us-busqueda')?.value || '';
@@ -269,7 +274,7 @@ function renderUsuarios() {
               <td><span class="badge ${u.estado==='activo'?'badge-green':'badge-gray'}">${u.estado}</span></td>
               <td class="acciones">
                 <button class="btn btn-sm btn-outline" onclick="formUsuario(${u.id})">Editar</button>
-                <button class="btn btn-sm btn-danger" onclick="eliminarUsuario(${u.id},'${u.nombre}')">Eliminar</button>
+                <button class="btn btn-sm btn-danger" data-id="${u.id}" data-nombre="${u.nombre}" onclick="eliminarUsuario(this)">Eliminar</button>
               </td>
             </tr>`).join('')}
         </tbody>
@@ -310,7 +315,9 @@ function formUsuario(id = null) {
   });
 }
 
-function eliminarUsuario(id, nombre) {
+function eliminarUsuario(btn) {
+  const id = btn.dataset.id;
+  const nombre = btn.dataset.nombre;
   confirmarEliminar(`¿Eliminar al usuario "${nombre}"?`, () => {
     const result = Usuarios.eliminar(id);
     mostrarExito(result.mensaje);
@@ -318,9 +325,9 @@ function eliminarUsuario(id, nombre) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// ==============
 // MÓDULO: TAREAS
-// ═══════════════════════════════════════════════════════════════════════════════
+// ==============
 function renderTareas() {
   const busqueda = document.getElementById('ta-busqueda')?.value || '';
   const filtroEstado = document.getElementById('ta-filtro-estado')?.value || '';
@@ -364,7 +371,7 @@ function renderTareas() {
               <td class="muted">${t.fecha_limite || '—'}</td>
               <td class="acciones">
                 <button class="btn btn-sm btn-outline" onclick="formTarea(${t.id})">Editar</button>
-                <button class="btn btn-sm btn-danger" onclick="eliminarTarea(${t.id},'${t.titulo}')">Eliminar</button>
+                <button class="btn btn-sm btn-danger" data-id="${t.id}" data-nombre="${t.titulo}" onclick="eliminarTarea(this)">Eliminar</button>
               </td>
             </tr>`).join('')}
         </tbody>
@@ -416,17 +423,19 @@ function formTarea(id = null) {
   });
 }
 
-function eliminarTarea(id, titulo) {
-  confirmarEliminar(`¿Eliminar la tarea "${titulo}"?`, () => {
+function eliminarTarea(btn) {
+  const id = btn.dataset.id;
+  const nombre = btn.dataset.nombre;
+  confirmarEliminar(`¿Eliminar la tarea "${nombre}"?`, () => {
     const result = Tareas.eliminar(id);
     mostrarExito(result.mensaje);
     renderTareas();
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// ================
 // MÓDULO: RESERVAS
-// ═══════════════════════════════════════════════════════════════════════════════
+// ================
 function renderReservas() {
   const busqueda = document.getElementById('re-busqueda')?.value || '';
   const filtroEstado = document.getElementById('re-filtro-estado')?.value || '';
@@ -468,7 +477,7 @@ function renderReservas() {
               <td class="muted">${r.fecha_reserva}</td>
               <td class="acciones">
                 <button class="btn btn-sm btn-outline" onclick="formReserva(${r.id})">Editar</button>
-                <button class="btn btn-sm btn-danger" onclick="eliminarReserva(${r.id})">Eliminar</button>
+                <button class="btn btn-sm btn-danger" data-id="${r.id}" onclick="eliminarReserva(this)">Eliminar</button>
               </td>
             </tr>`).join('')}
         </tbody>
@@ -523,7 +532,8 @@ function formReserva(id = null) {
   });
 }
 
-function eliminarReserva(id) {
+function eliminarReserva(btn) {
+  const id = btn.dataset.id;
   confirmarEliminar('¿Eliminar esta reserva? Solo se pueden eliminar reservas canceladas o completadas.', () => {
     const result = Reservas.eliminar(id);
     mostrarExito(result.mensaje);
@@ -531,9 +541,9 @@ function eliminarReserva(id) {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// ================
 // MÓDULO: CATÁLOGO
-// ═══════════════════════════════════════════════════════════════════════════════
+// ================
 function renderCatalogo() {
   const busqueda = document.getElementById('cat-busqueda')?.value || '';
   const filtroTipo = document.getElementById('cat-filtro-tipo')?.value || '';
@@ -574,7 +584,7 @@ function renderCatalogo() {
             <p class="content-desc muted">${c.descripcion||''}</p>
             <div class="content-actions">
               <button class="btn btn-sm btn-outline" onclick="formCatalogo(${c.id})">Editar</button>
-              <button class="btn btn-sm btn-danger" onclick="eliminarCatalogo(${c.id},'${c.titulo}')">Eliminar</button>
+              <button class="btn btn-sm btn-danger" data-id="${c.id}" data-nombre="${c.titulo}" onclick="eliminarCatalogo(this)">Eliminar</button>
             </div>
           </div>`).join('')}
     </div>`;
@@ -620,8 +630,10 @@ function formCatalogo(id = null) {
   });
 }
 
-function eliminarCatalogo(id, titulo) {
-  confirmarEliminar(`¿Eliminar "${titulo}"? Solo se puede si no está publicado.`, () => {
+function eliminarCatalogo(btn) {
+  const id = btn.dataset.id;
+  const nombre = btn.dataset.nombre;
+  confirmarEliminar(`¿Eliminar "${nombre}"? Solo se puede si no está publicado.`, () => {
     const result = Catalogo.eliminar(id);
     mostrarExito(result.mensaje);
     renderCatalogo();
