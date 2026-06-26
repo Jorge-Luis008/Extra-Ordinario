@@ -4,7 +4,7 @@ let db;
 
 async function initDB() {
   const SQL = await initSqlJs({
-    locateFile: file => `libs/${file}`
+    locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}`
   });
 
   const saved = localStorage.getItem('appdb');
