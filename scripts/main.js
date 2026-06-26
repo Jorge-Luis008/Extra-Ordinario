@@ -1,4 +1,5 @@
 // JavaScript principal de la UI
+
 let moduloActual = 'productos';
 
 // --- INICIALIZACIÓN --
@@ -229,7 +230,9 @@ function formProducto(id = null) {
   });
 }
 
-function eliminarProducto(id, nombre) {
+function eliminarProducto(btn) {
+  const id = btn.dataset.id;
+  const nombre = btn.dataset.nombre;
   confirmarEliminar(`¿Eliminar el producto "${nombre}"? Esta acción no se puede deshacer.`, () => {
     const result = Productos.eliminar(id);
     mostrarExito(result.mensaje);
