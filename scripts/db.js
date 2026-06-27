@@ -1,4 +1,4 @@
-// db.js — Inicialización de SQLite con SQL.js
+// db.js - Inicialización de SQLite con SQL.js
 let db;
 
 async function initDB() {
@@ -112,7 +112,7 @@ function seedData() {
   saveDB();
 }
 
-// ─── REGLAS DE NEGOCIO ──────────────────────────────────────────────────────
+// ---- REGLAS DE NEGOCIO ---
 
 // REGLA 1: Validación de duplicidad de email en usuarios
 function emailExiste(email, excludeId = null) {
@@ -166,7 +166,7 @@ function stockSuficiente(productoId, cantidad, reservaId = null) {
   return (stock - totalReservado) >= cantidad;
 }
 
-// ─── HELPERS ────────────────────────────────────────────────────────────────
+// --- HELPERS ---
 
 function queryAll(sql, params = []) {
   const result = db.exec(sql, params);

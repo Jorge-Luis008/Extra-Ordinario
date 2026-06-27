@@ -27,7 +27,7 @@
   --font-mono: 'Fira Code', 'Consolas', monospace;
 }
 
-/* ─── RESET ─────────────────────────────────────────────────────────────────── */
+/* --- RESET --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 body {
@@ -41,7 +41,7 @@ a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: inherit; }
 input, select, textarea { font-family: inherit; }
 
-/* ─── LOADING ────────────────────────────────────────────────────────────────── */
+/* --- LOADING --- */
 #loading-overlay {
   position: fixed; inset: 0; z-index: 9999;
   background: var(--bg-base);
@@ -58,14 +58,14 @@ input, select, textarea { font-family: inherit; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ─── LAYOUT ─────────────────────────────────────────────────────────────────── */
+/* --- LAYOUT --- */
 .app-layout {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
 
-/* ─── SIDEBAR ────────────────────────────────────────────────────────────────── */
+/* --- SIDEBAR --- */
 .sidebar {
   width: var(--sidebar-w);
   background: var(--bg-surface);
@@ -154,7 +154,7 @@ input, select, textarea { font-family: inherit; }
   50% { opacity: 0.4; }
 }
 
-/* ─── MAIN CONTENT ───────────────────────────────────────────────────────────── */
+/* --- MAIN CONTENT --- */
 .main-content {
   flex: 1;
   overflow-y: auto;
@@ -164,7 +164,7 @@ input, select, textarea { font-family: inherit; }
 .modulo { display: none; padding: 28px 32px; min-height: 100%; }
 .modulo.active { display: block; }
 
-/* ─── MODULE HEADER ──────────────────────────────────────────────────────────── */
+/* --- MODULE HEADER --- */
 .modulo-header {
   display: flex;
   align-items: flex-start;
@@ -183,7 +183,7 @@ input, select, textarea { font-family: inherit; }
   margin-top: 3px;
 }
 
-/* ─── STATS ──────────────────────────────────────────────────────────────────── */
+/* --- STATS --- */
 .stats-row {
   display: flex;
   gap: 12px;
@@ -217,7 +217,7 @@ input, select, textarea { font-family: inherit; }
   letter-spacing: 0.5px;
 }
 
-/* ─── FILTROS ────────────────────────────────────────────────────────────────── */
+/* --- FILTROS --- */
 .filtros-bar {
   display: flex;
   gap: 10px;
@@ -237,7 +237,7 @@ input, select, textarea { font-family: inherit; }
 }
 .input-filter:focus { border-color: var(--accent); }
 
-/* ─── TABLE ──────────────────────────────────────────────────────────────────── */
+/* --- TABLE --- */
 .table-wrap {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -288,7 +288,7 @@ td.empty {
   color: var(--text-muted);
 }
 
-/* ─── BADGES ─────────────────────────────────────────────────────────────────── */
+/* --- BADGES --- */
 .badge {
   display: inline-block;
   padding: 2px 8px;
@@ -303,7 +303,7 @@ td.empty {
 .badge-red    { background: rgba(244,96,96,.15);   color: var(--danger); }
 .badge-gray   { background: rgba(136,146,176,.1);  color: var(--text-secondary); }
 
-/* ─── BUTTONS ────────────────────────────────────────────────────────────────── */
+/* --- BUTTONS --- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -345,7 +345,7 @@ td.empty {
 
 .btn-sm { padding: 5px 10px; font-size: 12px; }
 
-/* ─── MODAL ──────────────────────────────────────────────────────────────────── */
+/* --- MODAL --- */
 #modal-overlay {
   position: fixed; inset: 0; z-index: 100;
   background: rgba(0,0,0,.65);
@@ -398,7 +398,7 @@ td.empty {
   border-top: 1px solid var(--border);
 }
 
-/* ─── FORM ───────────────────────────────────────────────────────────────────── */
+/* --- FORM --- */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -428,7 +428,7 @@ td.empty {
 .textarea { resize: vertical; min-height: 64px; }
 select.input option { background: var(--bg-surface); }
 
-/* ─── CONFIRM DIALOG ─────────────────────────────────────────────────────────── */
+/* --- CONFIRM DIALOG --- */
 #confirm-overlay {
   position: fixed; inset: 0; z-index: 200;
   background: rgba(0,0,0,.7);
@@ -458,7 +458,7 @@ select.input option { background: var(--bg-surface); }
   gap: 8px;
 }
 
-/* ─── TOAST ──────────────────────────────────────────────────────────────────── */
+/* --- TOAST --- */
 #toast-container {
   position: fixed;
   bottom: 24px; right: 24px;
@@ -486,7 +486,7 @@ select.input option { background: var(--bg-surface); }
 .toast-error   { background: #4a1a1a; border: 1px solid var(--danger);  color: var(--danger); }
 .toast-icon    { font-size: 16px; font-weight: bold; }
 
-/* ─── CARDS (catálogo) ───────────────────────────────────────────────────────── */
+/* --- CARDS (catálogo) --- */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -526,7 +526,7 @@ select.input option { background: var(--bg-surface); }
   margin-top: 6px;
 }
 
-/* ─── UTILS ──────────────────────────────────────────────────────────────────── */
+/* --- UTILS --- */
 .muted { color: var(--text-secondary); }
 .empty {
   text-align: center;
@@ -535,7 +535,7 @@ select.input option { background: var(--bg-surface); }
   font-size: 14px;
 }
 
-/* ─── SCROLLBAR ──────────────────────────────────────────────────────────────── */
+/* --- SCROLLBAR --- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }

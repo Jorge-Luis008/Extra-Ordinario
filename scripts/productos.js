@@ -1,8 +1,8 @@
-// productos.js — CRUD completo (entidad principal)
+// productos.js - CRUD completo (entidad principal)
 
 const Productos = {
 
-  // ── CREAR ────────────────────────────────────────────────────────────────
+  // --- CREAR ---
   crear(datos) {
     const { nombre, descripcion, precio, stock, categoria } = datos;
 
@@ -28,7 +28,7 @@ const Productos = {
     return { ok: true, mensaje: 'Producto creado correctamente.' };
   },
 
-  // ── LEER TODOS ───────────────────────────────────────────────────────────
+  // --- LEER TODOS ---
   listar(filtros = {}) {
     let sql = `SELECT * FROM productos WHERE 1=1`;
     const params = [];
@@ -49,12 +49,12 @@ const Productos = {
     return queryAll(sql, params);
   },
 
-  // ── LEER UNO ─────────────────────────────────────────────────────────────
+  // --- LEER UNO ---
   obtener(id) {
     return queryOne(`SELECT * FROM productos WHERE id = ?`, [id]);
   },
 
-  // ── ACTUALIZAR ───────────────────────────────────────────────────────────
+  // --- ACTUALIZAR ---
   actualizar(id, datos) {
     const { nombre, descripcion, precio, stock, categoria, estado } = datos;
 
@@ -78,7 +78,7 @@ const Productos = {
     return { ok: true, mensaje: 'Producto actualizado correctamente.' };
   },
 
-  // ── ELIMINAR ─────────────────────────────────────────────────────────────
+  // --- ELIMINAR ---
   eliminar(id) {
     // REGLA DE NEGOCIO: No eliminar si tiene reservas activas
     const reservasActivas = queryOne(
@@ -95,7 +95,7 @@ const Productos = {
     return { ok: true, mensaje: 'Producto eliminado correctamente.' };
   },
 
-  // ── ESTADÍSTICAS ─────────────────────────────────────────────────────────
+  // --- ESTADÍSTICAS ---
   estadisticas() {
     return {
       total: queryOne(`SELECT COUNT(*) as n FROM productos`).n,

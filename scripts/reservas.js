@@ -1,4 +1,4 @@
-// reservas.js — CRUD de reservas
+// reservas.js - CRUD de reservas
 
 const Reservas = {
 

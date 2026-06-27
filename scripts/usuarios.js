@@ -1,4 +1,4 @@
-// usuarios.js — CRUD de usuarios
+// usuarios.js - CRUD de usuarios
 
 const Usuarios = {
 

@@ -1,4 +1,4 @@
-// catalogo.js — CRUD de catálogo de contenido
+// catalogo.js - CRUD de catálogo de contenido
 
 const Catalogo = {
 
