@@ -1,117 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Sistema de Gestion</title>
-        <link rel="stylesheet" href="styles/styles.css">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataFlow — Sistema de Gestión</title>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
 
-    <body>
+  <!-- Loading overlay -->
+  <div id="loading-overlay">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <p>Iniciando base de datos...</p>
+    </div>
+  </div>
 
-        <!-- Cargar el overlay -->
-         <div id="loading-overlay">
-            <div class="loading-box">
-                <div class="spinner"></div>
-                <p>Iniciando base de datos...</p>
-            </div>
-         </div>
+  <!-- Toast container -->
+  <div id="toast-container"></div>
 
-         <!-- Contenedor de los toasts -->
-          <div id="toast-container"></div>
+  <!-- Modal principal -->
+  <div id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-titulo"></h3>
+        <button class="modal-close" onclick="cerrarModal()">✕</button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="cerrarModal()">Cancelar</button>
+        <button id="modal-guardar" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
 
-        <!-- Modal principal -->
-         <div id="modal-overlay">
-            <div class="modal">
-                <div class="modal-header">
-                    <h3 id="modal titulo"></h3>
-                    <button class="modal-close" onclick="">✕</button>
-                </div>
-                <div id="modal-body" class="modal-body"></div>
-                <div class="modal-footer">
-                    <button onclick="">Cancelar</button>
-                    <button class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-         </div>
+  <!-- Confirm dialog -->
+  <div id="confirm-overlay">
+    <div class="confirm-box">
+      <p id="confirm-msg"></p>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" onclick="cerrarConfirm()">Cancelar</button>
+        <button id="confirm-ok" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
 
-         <!-- Dialogo de confirmacion -->
-          <div id="confirm-overlay">
-            <div class="confirm-box">
-                <p id="confirm-msg"></p>
-                <div class="confirm-actions">
-                    <button class="btn btn-ghost" onclick="">Cancelar</button>
-                    <button id="confirm-ok" class="btn btn danger">Eliminar</button>
-                </div>
-            </div>
-          </div>
+  <!-- Layout -->
+  <div class="app-layout">
 
-          <!-- El layout de la pagina -->
-           <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-icon">⬡</span>
+        <span class="brand-name">Data Flow</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-link active" data-modulo="productos" href="#">
+          <span class="nav-icon">📦</span>
+          <span>Productos</span>
+          <span class="nav-badge">Principal</span>
+        </a>
+        <a class="nav-link" data-modulo="usuarios" href="#">
+          <span class="nav-icon">👥</span>
+          <span>Usuarios</span>
+        </a>
+        <a class="nav-link" data-modulo="tareas" href="#">
+          <span class="nav-icon">✅</span>
+          <span>Tareas</span>
+        </a>
+        <a class="nav-link" data-modulo="reservas" href="#">
+          <span class="nav-icon">📅</span>
+          <span>Reservas</span>
+        </a>
+        <a class="nav-link" data-modulo="catalogo" href="#">
+          <span class="nav-icon">📚</span>
+          <span>Catálogo</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="db-indicator">
+          <span class="db-dot"></span>
+          <span>SQLite · Local</span>
+        </div>
+      </div>
+    </aside>
 
-            <!-- Barra lateral -->
-             <aside class="sidebar">
-                <div class="sidebar-brand">
-                    <span class="brand-icon">◇</span>
-                    <span class="brand-name">DataFlow</span>
-                </div>
-                <nav class="sidebar-new">
-                    <!-- Boton de Productos -->
-                    <a class="nav-link active" data-modulo="productos" href="#">
-                        <span class="nav-icon">📦</span>
-                        <span>Productos</span>
-                        <span class="nav-badge">Principal</span>
-                    </a>
-                    <!-- Boton de Usuarios -->
-                     <a class="nav-link" data-modulo="usuarios" href="#">
-                        <span class="nav-icon">👥</span>
-                        <span>Usuarios</span>
-                     </a>
-                    <!-- Boton de Tareas -->
-                     <a class="nav-link" data-modulo="tareas" href="#">
-                        <span class="nav-icon">✅</span>
-                        <span>Tareas</span>
-                     </a>
-                    <!-- Boton de reservas -->
-                     <a class="nav-link" data-modulo="reservas" href="#">
-                        <span class="nav-icon">📝</span>
-                        <span>Reservas</span>
-                     </a>
-                    <!-- Boton del catalogo -->
-                     <a class="nav-link" data-modulo="catalogo" href="#">
-                        <span class="nav-iron">📚</span>
-                        <span>Catálogo</span>
-                     </a>
-                </nav>
-                <!-- Pie de la barra lateral -->
-                <div class="sidebar-footer">
-                    <div class="db-indicator">
-                        <span class="db-dot"></span>
-                        <span>SQLite • Local</span>
-                    </div>
-                </div>
-             </aside>
+    <!-- Main content -->
+    <main class="main-content">
+      <div id="modulo-productos" class="modulo active"></div>
+      <div id="modulo-usuarios" class="modulo"></div>
+      <div id="modulo-tareas" class="modulo"></div>
+      <div id="modulo-reservas" class="modulo"></div>
+      <div id="modulo-catalogo" class="modulo"></div>
+    </main>
 
-             <!-- Contenido principal -->
-              <main class="main-content">
-                <div id="modulo-productos" class="modulo active"></div>
-                <div id="modulo-usuarios" class="modulo"></div>
-                <div id="modulo-tareas" class="modulo"></div>
-                <div id="modulo-reservas" class="modulo"></div>
-                <div id="modulo-catalogos" class="modulo"></div>
-              </main>
+  </div>
 
-           </div>
+  <!-- Scripts: SQL.js desde CDN, luego db, luego módulos, luego main -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+  <script src="scripts/db.js"></script>
+  <script src="scripts/productos.js"></script>
+  <script src="scripts/usuarios.js"></script>
+  <script src="scripts/tareas.js"></script>
+  <script src="scripts/reservas.js"></script>
+  <script src="scripts/catalogo.js"></script>
+  <script src="scripts/main.js"></script>
 
-           <!-- Lugar de scripts, se tienen que dar en el suguiente ordern -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
-            <script src="scripts/db.js"></script>
-            <script src="scripts/productos.js"></script>
-            <script src="scripts/usuarios.js"></script>
-            <script src="scripts/tareas.js"></script>
-            <script src="scripts/reservas.js"></script>
-            <script src="scripts/catalogo.js"></script>
-            <script src="scripts/main.js"></script>
-
-    </body>
+</body>
 </html>

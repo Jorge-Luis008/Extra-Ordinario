@@ -1,33 +1,33 @@
-/* ------ VARIABLES ------ */
+/* ─── VARIABLES ─────────────────────────────────────────────────────────────── */
 :root {
-    --bg-base: #252525;
-    --bg-surface: #2b2c2e;
-    --bg-elevated: #41414e;
-    --bg-hover: #5d6372;
+  --bg-base:     #0f1117;
+  --bg-surface:  #181c27;
+  --bg-elevated: #1e2336;
+  --bg-hover:    #252a3d;
 
-    --accent: #3a7996;
-    --accent-dim: #30505f;
-    --success: #49af63;
-    --warning: #cecb3f;
-    --danger: #d85050;
-    --info: #3fabbe;
+  --accent:      #6c8fff;
+  --accent-dim:  #3d52a0;
+  --success:     #3ecf8e;
+  --warning:     #f0c040;
+  --danger:      #f46060;
+  --info:        #60b4f4;
 
-    --text-primary: #e0dddd;
-    --text-secondary: #929292;
-    --text-muted: #454457;
+  --text-primary:   #e8eaf6;
+  --text-secondary: #8892b0;
+  --text-muted:     #4a5278;
 
-    --border: #181525;
-    --border-focus: #314868;
+  --border:      #252a3d;
+  --border-focus:#6c8fff;
 
-    --sidebar-w: 220px;
-    --radius: 8px;
-    --radius-lg: 12px;
+  --sidebar-w: 220px;
+  --radius:    8px;
+  --radius-lg: 12px;
 
-    --font: 'Seguoe UI', system-ui, -apple-system, sans-serif;
-    --font-mono: 'Fira Code', 'Consolas', monospace;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fira Code', 'Consolas', monospace;
 }
 
-/* ------ RESET ------*/
+/* --- RESET --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 body {
@@ -41,7 +41,7 @@ a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: inherit; }
 input, select, textarea { font-family: inherit; }
 
-/* ------ CARGAR PAGINA ------*/
+/* --- LOADING --- */
 #loading-overlay {
   position: fixed; inset: 0; z-index: 9999;
   background: var(--bg-base);
@@ -58,14 +58,14 @@ input, select, textarea { font-family: inherit; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/*------ LAYOUT DE LA PAGINA ------*/
+/* --- LAYOUT --- */
 .app-layout {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
 
-/*------ BARRA LATERAL ------*/
+/* --- SIDEBAR --- */
 .sidebar {
   width: var(--sidebar-w);
   background: var(--bg-surface);
@@ -154,7 +154,7 @@ input, select, textarea { font-family: inherit; }
   50% { opacity: 0.4; }
 }
 
-/*------ CONTENIDO PRINCIPAL (MAIN CONTENT) ------*/
+/* --- MAIN CONTENT --- */
 .main-content {
   flex: 1;
   overflow-y: auto;
@@ -164,7 +164,7 @@ input, select, textarea { font-family: inherit; }
 .modulo { display: none; padding: 28px 32px; min-height: 100%; }
 .modulo.active { display: block; }
 
-/*------ ENCABEZADO DE LOS MODULOS ------*/
+/* --- MODULE HEADER --- */
 .modulo-header {
   display: flex;
   align-items: flex-start;
@@ -183,7 +183,7 @@ input, select, textarea { font-family: inherit; }
   margin-top: 3px;
 }
 
-/*------ ESTADISTICAS ------*/
+/* --- STATS --- */
 .stats-row {
   display: flex;
   gap: 12px;
@@ -217,7 +217,7 @@ input, select, textarea { font-family: inherit; }
   letter-spacing: 0.5px;
 }
 
-/*------ FILTROS ------*/
+/* --- FILTROS --- */
 .filtros-bar {
   display: flex;
   gap: 10px;
@@ -237,7 +237,7 @@ input, select, textarea { font-family: inherit; }
 }
 .input-filter:focus { border-color: var(--accent); }
 
-/*------ TABLA ------*/
+/* --- TABLE --- */
 .table-wrap {
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -288,7 +288,7 @@ td.empty {
   color: var(--text-muted);
 }
 
-/*------ INSIGNIAS ------*/
+/* --- BADGES --- */
 .badge {
   display: inline-block;
   padding: 2px 8px;
@@ -303,7 +303,7 @@ td.empty {
 .badge-red    { background: rgba(244,96,96,.15);   color: var(--danger); }
 .badge-gray   { background: rgba(136,146,176,.1);  color: var(--text-secondary); }
 
-/*------ BOTONES ------*/
+/* --- BUTTONS --- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -344,9 +344,9 @@ td.empty {
 .btn-ghost:hover { color: var(--text-primary); }
 
 .btn-sm { padding: 5px 10px; font-size: 12px; }
- 
-/*------ MODALES ------*/
- #modal-overlay {
+
+/* --- MODAL --- */
+#modal-overlay {
   position: fixed; inset: 0; z-index: 100;
   background: rgba(0,0,0,.65);
   display: none;
@@ -398,7 +398,7 @@ td.empty {
   border-top: 1px solid var(--border);
 }
 
-/*------ FORMULARIO ------*/
+/* --- FORM --- */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -428,7 +428,7 @@ td.empty {
 .textarea { resize: vertical; min-height: 64px; }
 select.input option { background: var(--bg-surface); }
 
-/*------ CONFIGURACIONES DEL DIALOGO (MENSAJES) ------*/
+/* --- CONFIRM DIALOG --- */
 #confirm-overlay {
   position: fixed; inset: 0; z-index: 200;
   background: rgba(0,0,0,.7);
@@ -458,7 +458,7 @@ select.input option { background: var(--bg-surface); }
   gap: 8px;
 }
 
-/*------ TOASTS ------*/
+/* --- TOAST --- */
 #toast-container {
   position: fixed;
   bottom: 24px; right: 24px;
@@ -486,7 +486,7 @@ select.input option { background: var(--bg-surface); }
 .toast-error   { background: #4a1a1a; border: 1px solid var(--danger);  color: var(--danger); }
 .toast-icon    { font-size: 16px; font-weight: bold; }
 
-/*------ CARTAS (DIALOGO) ------*/
+/* --- CARDS (catálogo) --- */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -526,7 +526,7 @@ select.input option { background: var(--bg-surface); }
   margin-top: 6px;
 }
 
-/*------ ULTILIDADES ------*/
+/* --- UTILS --- */
 .muted { color: var(--text-secondary); }
 .empty {
   text-align: center;
@@ -535,7 +535,7 @@ select.input option { background: var(--bg-surface); }
   font-size: 14px;
 }
 
-/*------ BARRA DE DESPLAZAMIENTO ------*/
+/* --- SCROLLBAR --- */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
