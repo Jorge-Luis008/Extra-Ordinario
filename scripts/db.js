@@ -1,4 +1,3 @@
-// Data base 
 // db.js — Inicialización de SQLite con SQL.js
 let db;
 

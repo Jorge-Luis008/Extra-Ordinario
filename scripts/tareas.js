@@ -1,4 +1,4 @@
-// Tareas a realizar - CRUD incluido
+// tareas.js — CRUD de tareas
 
 const Tareas = {
 

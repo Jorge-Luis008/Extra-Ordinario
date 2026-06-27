@@ -1,8 +1,8 @@
-// JavaScript principal de la UI
+// main.js — Controlador principal de UI
 
 let moduloActual = 'productos';
 
-// --- INICIALIZACIÓN --
+// ── INICIALIZACIÓN ───────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   mostrarCargando(true);
   try {
@@ -20,7 +20,7 @@ function mostrarCargando(estado) {
   document.getElementById('loading-overlay').style.display = estado ? 'flex' : 'none';
 }
 
-// --- NAVEGACIÓN ---
+// ── NAVEGACIÓN ───────────────────────────────────────────────────────────────
 function configurarNavegacion() {
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', e => {
@@ -52,7 +52,7 @@ function cargarModulo(modulo) {
   }
 }
 
-// --- NOTIFICACIONES ---
+// ── NOTIFICACIONES ───────────────────────────────────────────────────────────
 function toast(msg, tipo = 'success') {
   const cont = document.getElementById('toast-container');
   const t = document.createElement('div');
@@ -66,7 +66,7 @@ function toast(msg, tipo = 'success') {
 function mostrarError(msg) { toast(msg, 'error'); }
 function mostrarExito(msg) { toast(msg, 'success'); }
 
-// --- MODAL ---
+// ── MODAL ────────────────────────────────────────────────────────────────────
 function abrirModal(titulo, htmlContenido, onGuardar) {
   document.getElementById('modal-titulo').textContent = titulo;
   document.getElementById('modal-body').innerHTML = htmlContenido;
@@ -91,7 +91,7 @@ document.addEventListener('click', e => {
   if (e.target.id === 'modal-overlay') cerrarModal();
 });
 
-// --- CONFIRMAR ELIMINACIÓN ---
+// ── CONFIRMAR ELIMINACIÓN ────────────────────────────────────────────────────
 function confirmarEliminar(msg, onConfirm) {
   document.getElementById('confirm-msg').textContent = msg;
   document.getElementById('confirm-overlay').classList.add('active');
@@ -105,9 +105,9 @@ function cerrarConfirm() {
   document.getElementById('confirm-overlay').classList.remove('active');
 }
 
-// =====================================================
+// ═══════════════════════════════════════════════════════════════════════════════
 // MÓDULO: PRODUCTOS (entidad principal — CRUD completo)
-// =====================================================
+// ═══════════════════════════════════════════════════════════════════════════════
 function renderProductos() {
   const stats = Productos.estadisticas();
   const categorias = Productos.categoriasUnicas();
@@ -240,9 +240,9 @@ function eliminarProducto(btn) {
   });
 }
 
-// ================
+// ═══════════════════════════════════════════════════════════════════════════════
 // MÓDULO: USUARIOS
-// ================
+// ═══════════════════════════════════════════════════════════════════════════════
 function renderUsuarios() {
   const stats = Usuarios.estadisticas();
   const busqueda = document.getElementById('us-busqueda')?.value || '';
@@ -328,9 +328,9 @@ function eliminarUsuario(btn) {
   });
 }
 
-// ==============
+// ═══════════════════════════════════════════════════════════════════════════════
 // MÓDULO: TAREAS
-// ==============
+// ═══════════════════════════════════════════════════════════════════════════════
 function renderTareas() {
   const busqueda = document.getElementById('ta-busqueda')?.value || '';
   const filtroEstado = document.getElementById('ta-filtro-estado')?.value || '';
@@ -436,9 +436,9 @@ function eliminarTarea(btn) {
   });
 }
 
-// ================
+// ═══════════════════════════════════════════════════════════════════════════════
 // MÓDULO: RESERVAS
-// ================
+// ═══════════════════════════════════════════════════════════════════════════════
 function renderReservas() {
   const busqueda = document.getElementById('re-busqueda')?.value || '';
   const filtroEstado = document.getElementById('re-filtro-estado')?.value || '';
@@ -544,9 +544,9 @@ function eliminarReserva(btn) {
   });
 }
 
-// ================
+// ═══════════════════════════════════════════════════════════════════════════════
 // MÓDULO: CATÁLOGO
-// ================
+// ═══════════════════════════════════════════════════════════════════════════════
 function renderCatalogo() {
   const busqueda = document.getElementById('cat-busqueda')?.value || '';
   const filtroTipo = document.getElementById('cat-filtro-tipo')?.value || '';

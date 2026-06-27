@@ -1,4 +1,4 @@
-// Productos -  el CRUD se encuentra aqui 
+// productos.js — CRUD completo (entidad principal)
 
 const Productos = {
 
