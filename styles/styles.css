@@ -23,7 +23,7 @@
     --radius: 8px;
     --radius-lg: 12px;
 
-    --font: 'Seguoe UI', 'system-ui', -apple-system, 'sans-serif';
+    --font: 'Seguoe UI', system-ui, -apple-system, sans-serif;
     --font-mono: 'Fira Code', 'Consolas', monospace;
 }
 
@@ -64,6 +64,7 @@ input, select, textarea { font-family: inherit; }
   height: 100vh;
   overflow: hidden;
 }
+
 /*------ BARRA LATERAL ------*/
 .sidebar {
   width: var(--sidebar-w);
@@ -215,6 +216,7 @@ input, select, textarea { font-family: inherit; }
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
 /*------ FILTROS ------*/
 .filtros-bar {
   display: flex;
@@ -284,8 +286,9 @@ td.empty {
   text-align: center;
   padding: 40px;
   color: var(--text-muted);
+}
 
-}/*------ INSIGNIAS ------*/
+/*------ INSIGNIAS ------*/
 .badge {
   display: inline-block;
   padding: 2px 8px;
@@ -341,7 +344,8 @@ td.empty {
 .btn-ghost:hover { color: var(--text-primary); }
 
 .btn-sm { padding: 5px 10px; font-size: 12px; }
- /*------ MODALES ------*/
+ 
+/*------ MODALES ------*/
  #modal-overlay {
   position: fixed; inset: 0; z-index: 100;
   background: rgba(0,0,0,.65);

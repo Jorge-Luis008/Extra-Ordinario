@@ -1,4 +1,5 @@
 // Catalogo o inventario - CRUD
+
 const Catalogo = {
 
   crear(datos) {
