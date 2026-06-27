@@ -1,8 +1,8 @@
-// JavaScript principal de la UI
+// main.js - Controlador principal de UI
 
 let moduloActual = 'productos';
 
-// --- INICIALIZACIÓN --
+// --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', async () => {
   mostrarCargando(true);
   try {

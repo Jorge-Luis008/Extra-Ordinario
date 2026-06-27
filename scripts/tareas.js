@@ -1,4 +1,4 @@
-// Tareas a realizar - CRUD incluido
+// tareas.js - CRUD de tareas
 
 const Tareas = {
 
@@ -45,7 +45,7 @@ const Tareas = {
     const { titulo, descripcion, estado, prioridad, usuario_id, fecha_limite } = datos;
     if (!titulo || titulo.trim() === '') throw new Error('El título es obligatorio.');
 
-    // REGLA DE NEGOCIO 2: Control de flujo de estados
+    // REGLA DE NEGOCIO : Control de flujo de estados
     const actual = this.obtener(id);
     if (!actual) throw new Error('Tarea no encontrada.');
     if (estado !== actual.estado && !cambioEstadoValido(actual.estado, estado)) {
